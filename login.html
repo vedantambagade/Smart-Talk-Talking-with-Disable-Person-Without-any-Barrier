@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://img.freepik.com/premium-vector/geometric-gradient-technology-background_23-2149110132.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      display: flex;
+      width: 1300px;
+      height: 750px;
+      max-width: 95%;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+      flex-wrap: wrap;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 350px;
+      background: 
+        linear-gradient(135deg, rgba(30,60,114,0.85), rgba(42,82,152,0.85)),
+        url('https://static.vecteezy.com/system/resources/previews/008/311/935/non_2x/the-illustration-graphic-consists-of-abstract-background-with-a-blue-gradient-dynamic-shapes-composition-eps10-perfect-for-presentation-background-website-landing-page-wallpaper-vector.jpg') no-repeat center center;
+      background-size: cover;
+      background-blend-mode: overlay;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 30px;
+      text-align: center;
+    }
+
+    .welcome-heading {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 8px rgba(211, 214, 213, 0.527);
+      letter-spacing: 1px;
+      animation: pulseGlow 2.5s ease-in-out infinite;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .welcome-subtitle {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #7796a0;
+      font-weight: 300;
+      max-width: 400px;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .right {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 40px;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #333;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-box {
+      width: 100%;
+      max-width: 400px;
+      padding: 25px;
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      outline: none;
+      font-size: 0.95rem;
+      transition: border-color 0.3s;
+    }
+
+    .input-group input:focus {
+      border-color: #2575fc;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    .options a {
+      text-decoration: none;
+      color: #2575fc;
+      cursor: pointer;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .toggle-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+
+    .toggle-link a {
+      color: #dd2476;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .message {
+      font-size: 0.95rem;
+      text-align: center;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .error {
+      color: red;
+      background-color: #ffe6e6;
+    }
+
+    .success {
+      color: green;
+      background-color: #e6ffea;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left, .right {
+        flex: 1 1 100%;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .form-box {
+        max-width: 100%;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+      }
+      50% {
+        text-shadow: 0 0 20px rgba(0, 123, 255, 0.8), 0 0 30px rgba(0, 123, 255, 0.6);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Left Section -->
+    <div class="left">
+      <h1 class="welcome-heading">Welcome!</h1>
+      <p class="welcome-subtitle">Join us or sign in to continue.</p>
+    </div>
+
+    <!-- Right Section -->
+    <div class="right">
+      <!-- Login Form -->
+      <div class="form-box" id="loginBox">
+        <div class="avatar">👤</div>
+        <h2>Login</h2>
+        <div class="message" id="loginMessage"></div>
+        <form id="loginForm">
+          <div class="input-group">
+            <input type="text" id="loginUsername" placeholder="Username" required />
+          </div>
+          <div class="input-group">
+            <input type="password" id="loginPassword" placeholder="Password" required />
+          </div>
+          <div class="options">
+            <label><input type="checkbox" /> Remember</label>
+            <a onclick="showForgot()">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn">Login</button>
+          <div class="toggle-link">
+            <p>Don't have an account? <a onclick="showRegister()">Register</a></p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Register Form -->
+      <div class="form-box" id="registerBox" style="display:none;">
+        <div class="avatar">👤</div>
+        <h2>Register</h2>
+        <div class="message" id="registerMessage"></div>
+        <form id="registerForm">
+          <div class="input-group">
+            <input type="text" id="registerFullname" placeholder="Full Name" required />
+          </div>
+          <div class="input-group">
+            <input type="email" id="registerEmail" placeholder="Email" required />
+          </div>
+          <div class="input-group">
+            <input type="text" id="registerUsername" placeholder="Username" required />
+          </div>
+          <div class="input-group">
+            <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required />
+          </div>
+          <div class="input-group">
+            <input type="password" id="registerConfirmPassword" placeholder="Confirm Password" required />
+          </div>
+          <button type="submit" class="btn">Register</button>
+          <div class="toggle-link">
+            <p>Already have an account? <a onclick="showLogin()">Login</a></p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Forgot Password Form -->
+      <div class="form-box" id="forgotBox" style="display:none;">
+        <h2>Reset Password</h2>
+        <div class="message" id="forgotMessage"></div>
+        <form id="forgotForm">
+          <div class="input-group">
+            <input type="text" id="forgotUsername" placeholder="Enter your username" required />
+          </div>
+          <button type="submit" class="btn">Get Password</button>
+          <div class="toggle-link">
+            <p>Back to <a onclick="showLogin()">Login</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('users')) || {};
+    }
+
+    function saveUser(username, data) {
+      const users = getUsers();
+      users[username] = data;
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+
+    function clearMessages() {
+      ['loginMessage', 'registerMessage', 'forgotMessage'].forEach(id => {
+        const el = document.getElementById(id);
+        el.textContent = '';
+        el.className = 'message';
+      });
+    }
+
+    function showLogin() {
+      clearMessages();
+      document.getElementById('loginBox').style.display = 'block';
+      document.getElementById('registerBox').style.display = 'none';
+      document.getElementById('forgotBox').style.display = 'none';
+    }
+
+    function showRegister() {
+      clearMessages();
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('registerBox').style.display = 'block';
+      document.getElementById('forgotBox').style.display = 'none';
+    }
+
+    function showForgot() {
+      clearMessages();
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('registerBox').style.display = 'none';
+      document.getElementById('forgotBox').style.display = 'block';
+    }
+
+    // Register Form
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const fullname = document.getElementById('registerFullname').value.trim();
+      const email = document.getElementById('registerEmail').value.trim();
+      const username = document.getElementById('registerUsername').value.trim();
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+      const msg = document.getElementById('registerMessage');
+
+      if (!fullname || !email || !username || !password || !confirmPassword) {
+        msg.textContent = 'Please fill all fields.';
+        msg.className = 'message error';
+        return;
+      }
+
+      if (password.length < 6) {
+        msg.textContent = 'Password must be at least 6 characters.';
+        msg.className = 'message error';
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        msg.textContent = 'Passwords do not match.';
+        msg.className = 'message error';
+        return;
+      }
+
+      const users = getUsers();
+      if (users[username]) {
+        msg.textContent = 'Username already exists.';
+        msg.className = 'message error';
+        return;
+      }
+
+      saveUser(username, { fullname, email, password });
+
+      msg.textContent = 'Registration successful! You can now login.';
+      msg.className = 'message success';
+
+      this.reset();
+      setTimeout(() => { showLogin(); }, 2000);
+    });
+
+    // Login Form
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const msg = document.getElementById('loginMessage');
+
+      if (!username || !password) {
+        msg.textContent = 'Please fill all fields.';
+        msg.className = 'message error';
+        return;
+      }
+
+      const users = getUsers();
+      if (!users[username]) {
+        msg.textContent = 'User not found. Please register first.';
+        msg.className = 'message error';
+        return;
+      }
+
+      if (users[username].password !== password) {
+        msg.textContent = 'Incorrect password.';
+        msg.className = 'message error';
+        return;
+      }
+
+      msg.textContent = Welcome back, ${users[username].fullname}!;
+      msg.className = 'message success';
+      this.reset();
+    });
+
+    // Forgot Password
+    document.getElementById('forgotForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('forgotUsername').value.trim();
+      const msg = document.getElementById('forgotMessage');
+
+      if (!username) {
+        msg.textContent = 'Please enter your username.';
+        msg.className = 'message error';
+        return;
+      }
+
+      const users = getUsers();
+      if (!users[username]) {
+        msg.textContent = 'Username not found.';
+        msg.className = 'message error';
+        return;
+      }
+
+      msg.innerHTML = Your password is: <strong>${users[username].password}</strong>;
+      msg.className = 'message success';
+      this.reset();
+    });
+  </script>
+</body>
+</html>

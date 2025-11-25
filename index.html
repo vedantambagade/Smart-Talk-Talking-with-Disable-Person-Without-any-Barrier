@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartTaking</title>
+    <!-- Corrected CSS path -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Video background -->
+        <video class="back-vid" autoplay loop muted playsinline src="{{ url_for('static', filename='videos/galaxy.mp4') }}"></video>
+
+        <header data-aos="fade-down" data-aos-duration="2000">
+            <div class="left">
+                <img src="{{ url_for('static', filename='images/smarttalking.jpg') }}" alt="logo">
+                <h2><span style="color: #72a1dea2;">Smart</span>Taking</h2>
+            </div>
+            <ul>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('login') }}">&</a></li>
+                <li><a href="{{ url_for('login') }}">Register</a></li>
+
+            </ul>
+            <div class="menu-icon">
+                <i class='bx bx-menu'></i>
+            </div>            
+        </header>
+
+        <div class="sidebar">
+            <div class="close-icon">
+                <i class='bx bx-x'></i>
+            </div>
+            <ul>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('login') }}">&</a></li>
+                <li><a href="{{ url_for('login') }}">Register</a></li>
+
+            </ul>
+        </div>
+
+        <!-- Parameters Section -->
+        <section class="my-project">
+            <h1 class="section-title autoDisplay">Project 👨‍💻</h1>
+
+            <!-- Emotion Detection -->
+            <div class="project-card">
+                <div class="project-vidbox autoBlur">
+                    <img src="{{ url_for('static', filename='images/Emotion.jpg') }}" alt="Emotion System">
+                </div>
+                <div class="project-info fadein-left">
+                    <h1>Emotion <span class="gradient"> Recognition </span> System</h1>
+                    <p>"Where advanced AI meets human feelings—recognizing emotions instantly through the language of faces and voices."</p>
+                    <button id="emotionBtn"><i class='bx bx-link-external'></i> Emotion</button>
+                </div>
+            </div>
+
+            <!-- Person Detection -->
+            <div class="project-card">
+                <div class="project-vidbox autoBlur">
+                    <img src="{{ url_for('static', filename='images/FallDetection.jpg') }}" alt="Person Detection">
+                </div>
+                <div class="project-info fadein-left">
+                    <h1>Person <span class="gradient"> Recognition </span> System</h1>
+                    <p>"Our system watches people in real time. It detects if someone falls or has an accident and sends alerts immediately."</p>
+                    <button id="personBtn"><i class='bx bx-link-external'></i> Person-Detection</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills-section">
+    <h1 class="section-title autoDisplay">
+        Project Description 📝
+    </h1>
+    <div class="skills-box autoDisplay">
+        <img class="skills-image" src="{{ url_for('static', filename='images/digital brain (2).png') }}" alt="Skill Image">
+        
+        <div class="Designer">
+            <h1 class="gradient">Emotion Detection <i class='bx bx'></i></h1>
+            <p>Emotion Detection leverages AI to identify human emotions accurately from facial expressions. It helps in understanding feelings instantly, enabling responsive interactions. This system enhances communication by bridging emotional gaps efficiently</p>    
+        </div>
+        
+        <div class="coder">
+            <h1 class="gradient">Person Detection <i class='bx bx'></i></h1>
+            <p>Person Detection monitors real-time movements to identify people and detect accidents like falls. It sends instant alerts to caregivers or authorities for quick assistance. This system ensues safety and provides timely intervention in critical situations..</p>
+        </div>
+
+        <div class="slider" reverse="true" style="
+            --width: 100px;
+            --height: 100px;
+            --quantity: 9;
+        ">
+        </div>
+    </div>
+</section>
+
+        <section class="footer">
+            <h1>2025, Made by Bhumika Tupe</h1>
+        </section>
+    </div>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Emotion Detection Button
+        document.getElementById('emotionBtn').onclick = async () => {
+            const res = await fetch('/predict_emotion', { method: 'POST' });
+            const data = await res.json();
+            alert('Detected Emotion: ' + data.emotion);
+        };
+
+        // Person Detection Button
+        document.getElementById('personBtn').onclick = async () => {
+            const res = await fetch('/detect_person', { method: 'POST' });
+            const data = await res.json();
+            alert(data.person);
+        };
+    </script>
+</body>
+</html>
